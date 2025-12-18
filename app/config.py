@@ -1,8 +1,9 @@
-from dotenv import load_dotenv
+from dotenv import load_dotenv  # type: ignore
 import os
-# Purpose:
-# ✔ Load secrets safely
-# ✔ Needed for deployment later
+
+
+# Load secrets safely
+# for local development
 
 load_dotenv()
 

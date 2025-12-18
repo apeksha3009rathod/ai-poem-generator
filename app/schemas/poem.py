@@ -1,11 +1,10 @@
 from pydantic import BaseModel
-
 from datetime import datetime
+from typing import List
 
 
 class PoemRequest(BaseModel):
     input_text: str
-    style: str | None = "free verse"
 
 
 class PoemResponse(BaseModel):
@@ -15,7 +14,6 @@ class PoemResponse(BaseModel):
 class PoemItem(BaseModel):
     id: int
     input_text: str
-    style: str
     poem: str
     created_at: datetime
 
@@ -25,4 +23,4 @@ class PoemItem(BaseModel):
 
 class PoemListResponse(BaseModel):
     total: int
-    items: list[PoemItem]
+    items: List[PoemItem]
