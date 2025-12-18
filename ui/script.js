@@ -1,4 +1,8 @@
-const API_URL = "http://127.0.0.1:8088/api/v1/poem";
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8088/api/v1/poem"
+    : "https://YOUR-BACKEND.onrender.com/api/https://ai-poem-generator-fwdr.onrender.com/poem";
+
 // change to Render URL later
 
 async function generatePoem() {

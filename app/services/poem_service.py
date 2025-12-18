@@ -1,5 +1,5 @@
 import os
-import google.generativeai as genai  # type: ignore
+from google import genai  # type: ignore
 from sqlalchemy.orm import Session  # type: ignore
 
 from app.db.models import Poem
@@ -10,13 +10,12 @@ from app.utils.logger import logger
 # Gemini setup
 # -------------------
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-if not GEMINI_API_KEY:
+API_KEY = os.getenv("GEMINI_API_KEY")
+if not API_KEY:
     raise RuntimeError("GEMINI_API_KEY is not set")
 
-genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-2.5-flash-lite")
+client = genai.Client(api_key=API_KEY)
 
 
 # -------------------
@@ -43,7 +42,10 @@ def generate_poem(input_text: str, db: Session) -> str:
     """
 
     try:
-        response = model.generate_content(poetic_prompt)
+        response = client.models.generate_content(
+            model="gemini-2.5-flash-lite",
+            contents=poetic_prompt,
+        )
         poem_text = response.text
     except Exception as exc:
         logger.exception("Gemini failed")

@@ -6,3 +6,4 @@ google-generativeai
 strawberry-graphql
 sqlalchemy
 psycopg2-binary
+google-genai
